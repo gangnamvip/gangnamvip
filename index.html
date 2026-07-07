@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>
+        강남 룸 | 강남 프리미엄 룸살롱 | 예약 및 문의
+    </title>
+
+    <style>
+        :root {
+            --bg: #0a0a0a;
+            --card: #151515;
+            --text: #ffffff;
+            --sub: #b8b8b8;
+            --purple: #8b5cf6;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Pretendard", sans-serif;
+            background: var(--bg);
+            color: var(--text);
+        }
+
+        img {
+            width: 100%;
+            display: block;
+        }
+
+        section {
+            padding: 80px 24px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: auto;
+        }
+
+        h2 {
+            font-size: 36px;
+            margin-bottom: 20px;
+        }
+
+        p {
+            color: var(--sub);
+        }
+
+        /* HERO */
+        .hero {
+            height: 100vh;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero img {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .hero::after {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(rgba(0, 0, 0, .3),
+                    rgba(0, 0, 0, .85));
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 20px;
+        }
+
+        .badge {
+            padding: 10px 18px;
+            border-radius: 999px;
+            backdrop-filter: blur(20px);
+            background: rgba(255, 255, 255, .12);
+            border: 1px solid rgba(255, 255, 255, .15);
+            margin-bottom: 20px;
+        }
+
+        .hero h1 {
+            font-size: 72px;
+            margin-bottom: 10px;
+        }
+
+        .hero p {
+            font-size: 22px;
+        }
+
+        /* cards */
+        .grid-3 {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+        }
+
+        .card {
+            background: var(--card);
+            border-radius: 24px;
+            overflow: hidden;
+            border: 1px solid rgba(255, 255, 255, .05);
+        }
+
+        .card img {
+            height: 220px;
+            object-fit: cover;
+        }
+
+        .card-content {
+            padding: 20px;
+        }
+
+        /* quote */
+        .quote {
+            text-align: center;
+            padding: 140px 24px;
+        }
+
+        .quote h2 {
+            font-size: 52px;
+            line-height: 1.4;
+        }
+
+        .rooms {
+            /* 슬라이더가 화면 끝까지 스와이프 되도록 우측 패딩 제거 */
+            padding-left: 24px; 
+            padding-right: 0; 
+        }
+
+        .rooms h2 {
+            /* 제목은 기존 패딩 유지 */
+            padding-right: 24px; 
+        }
+
+        .room-slider {
+            display: flex;
+            gap: 20px;
+            overflow-x: auto; /* 가로 스크롤 활성화 */
+            scroll-snap-type: x mandatory; /* 자석처럼 딱 붙는 스냅 효과 */
+            padding-bottom: 20px;
+            padding-right: 24px; /* 마지막 카드 스크롤 여유 공간 */
+            
+            /* 스크롤바 숨기기 (모바일 앱 같은 깔끔한 UI) */
+            -ms-overflow-style: none; /* IE, Edge */
+            scrollbar-width: none; /* Firefox */
+        }
+
+        .room-slider::-webkit-scrollbar {
+            display: none; /* Chrome, Safari, Opera */
+        }
+
+        .room-card {
+            /* flex 환경에서 카드가 찌그러지지 않고 고정 너비를 가지도록 설정 */
+            flex-shrink: 0; 
+            min-width: 300px; /* 원하는 카드 너비 (화면 크기에 맞춰 조절 가능) */
+            
+            scroll-snap-align: center; /* 스와이프 시 카드가 화면 중앙에 정렬 */
+            border-radius: 24px;
+            overflow: hidden;
+            background: var(--card);
+            border: 1px solid rgba(255, 255, 255, .05);
+        }
+
+        .room-card img {
+            height: 380px; /* 이미지 높이 통일 */
+            object-fit: cover;
+        }
+
+        .room-card h3 {
+            padding: 20px;
+            text-align: center;
+            font-size: 20px;
+        }
+
+        /* event */
+        .event {
+            background: linear-gradient(135deg,
+                    #6d28d9,
+                    #9333ea);
+            padding: 40px;
+            border-radius: 30px;
+        }
+
+
+        /* footer & copyright */
+        footer {
+            text-align: center;
+            padding: 80px 20px 140px; /* 플로팅 바 공간을 위해 하단 140px 여백 */
+            color: #777; /* 눈에 덜 띄는 서브 톤으로 조정 */
+            font-size: 14px;
+            line-height: 1.6;
+            background-color: #050505; /* 배경색보다 살짝 더 어둡게 처리 */
+            border-top: 1px solid rgba(255, 255, 255, .05); /* 본문과 구분선 */
+        }
+
+        footer strong {
+            color: #999;
+            font-size: 16px;
+            display: inline-block;
+            margin-bottom: 8px;
+        }
+
+        footer a {
+            color: #777;
+            text-decoration: none;
+        }
+
+        .footer-info {
+            margin-bottom: 20px;
+        }
+
+        .copyright {
+            font-size: 12px;
+            color: #555;
+            letter-spacing: 0.5px;
+        }
+
+        /* floating */
+        .floating-bar {
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: min(92%, 500px);
+            backdrop-filter: blur(30px);
+            -webkit-backdrop-filter: blur(30px);
+            background: rgba(255, 255, 255, .12);
+            border: 1px solid rgba(255, 255, 255, .18);
+            border-radius: 30px;
+            box-shadow:
+                0 10px 40px rgba(0, 0, 0, .4),
+                inset 0 1px 0 rgba(255, 255, 255, .2);
+
+            display: flex;
+            z-index: 999;
+        }
+
+        .floating-bar a {
+            flex: 1;
+            text-align: center;
+            color: white;
+            text-decoration: none;
+            padding: 18px 10px;
+            font-weight: 600;
+        }
+
+        @media(max-width:768px) {
+
+            .hero h1 {
+                font-size: 46px;
+            }
+
+            .quote h2 {
+                font-size: 32px;
+            }
+
+            .map-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- HERO -->
+    <section class="hero">
+        <img src="https://picsum.photos/id/1068/1920/1080">
+        <div class="hero-content">
+            <div class="badge">
+                🎤 24시간 운영
+            </div>
+            <h1>오늘의 주인공은 당신입니다</h1>
+            <p>
+                
+            </p>
+        </div>
+    </section>
+
+    <!-- 소개 -->
+    <section>
+        <div class="container">
+            <h2>시설 소개</h2>
+            <div class="grid-3">
+                <div class="card">
+                    <img src="https://picsum.photos/id/1040/800/600">
+                    <div class="card-content">
+                        <h3>프리미엄 룸</h3>
+                        <p>넓고 쾌적한 공간</p>
+                    </div>
+                </div>
+                <div class="card">
+                    <img src="https://picsum.photos/id/1041/800/600">
+                    <div class="card-content">
+                        <h3>최신 음향</h3>
+                        <p>생생한 사운드</p>
+                    </div>
+                </div>
+                <div class="card">
+                    <img src="https://picsum.photos/id/1043/800/600">
+                    <div class="card-content">
+                        <h3>감성 조명</h3>
+                        <p>분위기 있는 공간</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 감성 문구 -->
+    <section class="quote">
+        <h2>
+            노래는 잘하는 것이 아니라<br>
+            즐기는 것입니다.
+        </h2>
+    </section>
+
+    <!-- 갤러리 -->
+    <section class="rooms">
+        <h2>ROOMS</h2>
+        <div class="room-slider">
+            <div class="room-card">
+                <img src="https://picsum.photos/id/1011/600/800">
+                <h3>VIP ROOM</h3>
+            </div>
+            <div class="room-card">
+                <img src="https://picsum.photos/id/1015/600/900">
+                <h3>PARTY ROOM</h3>
+            </div>
+            <div class="room-card">
+                <img src="https://picsum.photos/id/1016/600/700">
+                <h3>PREMIUM ROOM</h3>
+            </div>
+            <div class="room-card">
+                <img src="https://picsum.photos/id/1025/600/1000">
+                <h3>PREMIUM ROOM</h3>
+            </div>
+        </div>
+    </section>
+
+    <!-- 이벤트 -->
+    <section>
+        <div class="container">
+            <div class="event">
+                <h2>🎉 이벤트</h2>
+                <p>
+                    생일 고객 무료 케이크 서비스
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- 위치 안내 -->
+    <section>
+        <div class="container">
+            <h2>위치 안내</h2>
+
+            <div class="card">
+                <div class="card-content">
+
+                    <h3>강남 중심 프리미엄 룸</h3>
+
+                    <p style="margin-top:15px; line-height:1.9;">
+                        강남 룸을 찾는 고객분들을 위해 편리한 위치에서
+                        프리미엄 서비스를 제공합니다.
+                        강남 룸살롱, 강남 유흥, 강남 술집을 찾는
+                        다양한 고객들이 방문하며
+                        VIP 룸과 프라이빗 룸을 운영하고 있습니다.
+                    </p>
+
+                    <p style="margin-top:20px; line-height:1.9;">
+                        강남 프리미엄 룸, 강남 VIP 룸,
+                        강남 접대, 강남 회식 장소,
+                        강남 모임은 물론
+                        역삼 룸, 신논현 룸,
+                        삼성동 룸, 청담 룸을
+                        찾는 고객들도 편리하게 이용하실 수 있습니다.
+                    </p>
+
+                    <p style="margin-top:20px; line-height:1.9;">
+                        VIP 룸, 프라이빗 룸,
+                        프리미엄 서비스,
+                        예약 상담,
+                        24시간 상담,
+                        단체 예약,
+                        생일 이벤트,
+                        회식 예약,
+                        단체 모임,
+                        프리미엄 시설까지
+                        다양한 서비스를 제공합니다.
+                    </p>
+
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="footer-info">
+            <strong>강남 프리미엄 룸</strong><br>예약문의<br>
+            전화: <a href="tel:01022631805">010-2263-1805</a>
+        </div>
+        <div class="copyright">
+            Copyright &copy; 2026 권사장. All rights reserved.
+        </div>
+    </footer>
+
+    <!-- 아이폰 스타일 플로팅 바 -->
+    <div class="floating-bar">
+        <a class="call-btn" href="tel:01022631805">
+            📞 전화
+        </a>
+    </div>
+</body>
+</html>
