@@ -38,7 +38,6 @@ section {
 
 h2 {
     font-size: 36px;
-    margin-bottom: 20px;
 }
 
 p {
@@ -92,10 +91,15 @@ p {
 .hero h1 {
     font-size: 72px;
     margin-bottom: 10px;
+    word-break: keep-all;
 }
 
 .hero p {
     font-size: 22px;
+}
+
+.sub-title {
+    margin-bottom: 20px;
 }
 
 /* cards */
@@ -183,6 +187,11 @@ p {
     font-size: 20px;
 }
 
+.room-note {
+    color: var(--sub);
+    font-size: 0.8rem;
+}
+
 /* event */
 .event {
     background: linear-gradient(135deg,
@@ -190,6 +199,11 @@ p {
             #9333ea);
     padding: 40px;
     border-radius: 30px;
+}
+
+.position-card {
+    margin-top:20px;
+    line-height:1.9;
 }
 
 
